@@ -11,17 +11,13 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.set('view engine', 'ejs');
 
-// socket.io
-const server = require('http').createServer(app);
-const io = require('socket.io').listen(server);
-
 // start Discord bot
 const { emitter, getRoles } = require('./discordBot');
 
 // start server 
 const PORT = process.env.PORT || 3000;
 
-server.listen(PORT, ()=> {
+app.listen(PORT, ()=> {
 	console.log(`server started on PORT - ${PORT}`);
 });
 

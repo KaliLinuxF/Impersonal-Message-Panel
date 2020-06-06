@@ -25,11 +25,13 @@ client.once('disconnect', () => {
 	console.log('discord bot has been disconnected!');
 });
 
-emitter.on('newDiscordMsg', (role, msg) => {
+emitter.on('newDiscordMsg', (msgToRole, msg) => {
 
-	if(!msg || !role) {
+	if(!msg || !msgToRole) {
 		return channel.send('Вы не указали роль, или сообщение!');
 	}
+
+	const roleID = channel.guild.roles.cache.find(role => role.name == msgToRole);
 
 	const embed = new Discord.MessageEmbed()
 			   .setAuthor('Message Control Panel')
@@ -38,7 +40,7 @@ emitter.on('newDiscordMsg', (role, msg) => {
 			   .setTitle(`Обращение к участникам Discord канала`);
 
 
-	channel.send(role, embed);
+	channel.send('<@&' + roleID + '>', embed);
 
 });
 
