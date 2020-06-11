@@ -1,5 +1,4 @@
 // Stuff
-const config = require('./config.json');
 const Emitter = require('events');
 
 const emitter = new Emitter();
@@ -16,7 +15,7 @@ client.once('ready', () => {
 
 	console.log('discord bot started');
 
-	channel = client.guilds.cache.get(config.guildID).channels.cache.get(config.channelID);
+	channel = client.guilds.cache.get(process.env.GUILDID).channels.cache.get(process.env.CHANNELID);
 	roles = channel.guild.roles.cache;
 	console.log('discord bot has been configured');
 });
@@ -48,7 +47,7 @@ function getRoles() {
 	return roles;
 };
 
-client.login(config.token);
+client.login(process.env.TOKEN);
 
 module.exports.getRoles = getRoles;
 module.exports.emitter = emitter;
